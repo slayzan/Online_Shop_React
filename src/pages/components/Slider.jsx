@@ -1,5 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { mobile } from '../../responsive';
 import {ArrowLeftOutlined, ArrowRightOutlined} from '@material-ui/icons'
 import { sliderItems } from '../data';
 import { useState } from 'react';
@@ -14,10 +15,8 @@ const Slider = () => {
         }else {
             setSlideIndex(slideIndex < 1 ? slideIndex + 1 : 0)
         }
-
     };
 
- 
     return (
        <Container>
            <Arrow direction="left" onClick={()=>handleClick("left")}>
@@ -51,7 +50,8 @@ const Container = styled.div`
     display: flex;
     position: relative;
     overflow: hidden;
-    margin-top:15px;
+    margin-top:15px;  
+    ${mobile({ display: "none" })}
 `;
 const Arrow = styled.div`
     width: 50px;

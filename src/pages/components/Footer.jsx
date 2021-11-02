@@ -1,5 +1,6 @@
-import styled  from 'styled-components'
-import React from 'react'
+import styled  from 'styled-components';
+import React from 'react';
+import {mobile} from '../../responsive'
 import { Facebook, Instagram, Twitter, Room, Phone, Mail } from '@material-ui/icons';
 
 
@@ -58,6 +59,7 @@ const Footer = () => {
 const Container = styled.div`
     display: flex;
     padding: 20px;
+    ${mobile({ flexDirection: "column" })}
 
 `;
 
@@ -96,6 +98,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
     flex:1;
     padding: 20px 40px;
+    ${mobile({ display: "none" })}
 `;
 
 const Title = styled.h1`
@@ -118,6 +121,7 @@ const ListItem = styled.div`
 const Right = styled.div`
     flex: 1;
     padding: 20px;
+    ${mobile({ backgroundColor: "#fff8f8" })}
 `;
 
 const ContactItem = styled.div`
