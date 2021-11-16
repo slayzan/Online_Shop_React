@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { boolean } = require("webidl-conversions");
 
-const CartSchema = new.mongoose.Schema(
+const CartSchema = new mongoose.Schema(
     {
         userID: {type:String, required:true},
         products: [
