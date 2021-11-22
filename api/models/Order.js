@@ -3,7 +3,7 @@ const { boolean } = require("webidl-conversions");
 
 const OrderSchema = new mongoose.Schema(
     {
-        userID: {type:String, required:true},
+        userId  : {type:String, required:true},
         products: [
             {
                 productId:{

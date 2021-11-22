@@ -17,59 +17,45 @@ router.post("/", verifyTokenAndAuthorization, async (req, res) => {
 //UPDATE
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
-      const updatedProduct = await Product.findByIdAndUpdate(
+      const updatedCart = await Cart.findByIdAndUpdate(
         req.params.id,
         {
           $set: req.body,
         },
         { new: true }
       );
-      res.status(200).json(updatedProduct);
+      res.status(200).json(updatedCart);
     } catch (err) {
       res.status(500).json(err);
     }
   });
 
 //DELETE
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try{
-        await Product.findByIdAndDelete(req.params.id)
-        res.status(200).json("Product has been deleted!")
+        await Cart.findByIdAndDelete(req.params.id)
+        res.status(200).json("Cart has been deleted!")
     } catch(err){
       res.status(500).json(err);
     }
 });
 
 
-//GET PRODUCT
-router.get("/find/:id", async (req, res) => {
+//GET USER CART
+router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     try{
-        const product = await Product.findById(req.params.id)
-        res.status(200).json(product);
+        const cart = await Cart.findOne({userId: req.params.userId});
+        res.status(200).json(cart);
     } catch(err){
         (500).json(err);
     }
 });
 
-//GET ALL PRODUCT
+//GET ALL
 router.get("/",  async (req, res) => {
-    const queryNew = req.query.new;
-    const queryCategory = req.query.category;
-
     try{
-        let products;
-        if (queryNew){
-            products = await Product.find().sort({createdAt: -1}).limit(1);
-        } else if(queryCategory) {
-            products = await Product.find({
-                categories: {
-                    $in: [queryCategory],
-                },
-            });
-        }else {
-            products = await Product.find();
-        }
-        res.status(200).json(products);
+        const carts = await Cart.find();
+        res.status(200).json(carts);
     } catch(err){
       res.status(500).json(err);
     }

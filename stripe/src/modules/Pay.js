@@ -12,6 +12,7 @@ const Pay = () => {
        setStripeToken(token);
        console.log(stripeToken);
     }
+    
     useEffect(()=>{
         const makeRequest = async () => {
             try{
