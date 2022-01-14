@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { mobile } from '../../responsive';
-import {Search, ArrowDropDown, ShoppingCartOutlined, FormatListBulleted} from "@material-ui/icons";
+import {Search, ShoppingCartOutlined, FormatListBulleted} from "@material-ui/icons";
 import Badge from '@mui/material/Badge';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 const Navbar = () => {
+    const quantity = useSelector(state => state.cart.quantity)
+    
     return (
         <Container>
             <WrapperEvent><Event>Super Deal! Free Shipping</Event></WrapperEvent>
@@ -23,16 +28,18 @@ const Navbar = () => {
                 <Right>
                     <MenuItem>Register</MenuItem>
                     <MenuItem>Sign In</MenuItem>
+                    <Link to="/cart">
                     <MenuItem>
-                        <Badge badgeContent={4} color="secondary">
+                        <Badge badgeContent={quantity} color="secondary">
                             <ShoppingCartOutlined/>
                         </Badge>
                     </MenuItem>
                     <MenuItemMobile>
-                        <Badge badgeContent={4} color="secondary">
+                        <Badge badgeContent={quantity} color="secondary">
                             <ShoppingCartOutlined/>
                         </Badge>
                     </MenuItemMobile>
+                    </Link>
                 </Right>
             </Wrapper>
         </Container>
